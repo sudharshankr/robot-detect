@@ -34,7 +34,7 @@ def process_packet(packet):
         enc_premaster_secret = raw[11:11+length]
         print("enc_premaster_secret: " + str(to_hex(enc_premaster_secret)))
         dec_premaster_secret = perform_decrypt_attack('10.0.1.30', 4000, enc_premaster_secret, 5, False)
-        print("Decrypted premaster secret: ", dec_premaster_secret)
+        print("Decrypted premaster secret: ", hex(dec_premaster_secret))
         exit(0)
 
 
