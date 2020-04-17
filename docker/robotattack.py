@@ -152,7 +152,7 @@ def BleichenbacherOracle(cc):
     global countvalid
     count = count + 1
     if count % 1000 == 0:
-        print(count, "oracle queries")
+        print(count, "oracle queries", end='\r')
     tmp = hex(cc).rstrip("L").lstrip("0x").rjust(modulus_bits // 4, '0')
     pms = bytearray.fromhex(tmp)
     o = oracle(pms, messageflow=flow)
@@ -163,7 +163,7 @@ def BleichenbacherOracle(cc):
             countvalid += 1
             return True
         else:
-            print("Inconsistent result from oracle.")
+            print("\nInconsistent result from oracle.")
             return False
     else:
         return False
@@ -456,13 +456,13 @@ def perform_decrypt_attack(host_name, server_port, ciphertext, s_quiet=True, s_c
           intervalsize = int(math.ceil(math.log(b - a, 2)))
           if not intervalsize == previntervalsize:
               previntervalsize = intervalsize
-              print(count, "oracle queries, Interval size:", intervalsize, "bit.")
+              print(count, "oracle queries, Interval size:", intervalsize, "bit.", end="\r")
           if intervalsize < 10:
               break
 
       i += 1
 
-  print
+  print('\n')
   print("Starting exhaustive search on remaining interval")
 
   print("min: ", hex(a))
