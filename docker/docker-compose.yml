@@ -1,23 +1,11 @@
 version: '2.1'
 services:
-  attacker:
-    container_name: 'attacker'
-    command: ./attacker.sh
-    image: robotattack
-    volumes:
-      - ./:/tmp
-    environment:
-      - "PYTHONUNBUFFERED=1"
-    networks:
-      frontend:
-        ipv4_address: 10.0.1.10
-
   ids:
     container_name: 'client'
-    command: ./client.sh
+    command: ./docker/client.sh
     image: robotattack
     volumes:
-      - ./:/tmp
+      - ../:/tmp
     environment:
       - "PYTHONUNBUFFERED=1"
     networks:
@@ -28,6 +16,8 @@ services:
     container_name: 'server'
     command: ''
     image: erlang-server
+    logging:
+      driver: "none"
     volumes:
       - ./:/tmp
     environment:
