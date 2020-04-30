@@ -30,7 +30,7 @@ example for session resumption:
 
 
 class Decrypt:
-    def __init__(self, pms_hex, client_r, server_r):
+    def __init__(self, pms_hex, client_r, server_r, cipher):
         self.pms = bytes.fromhex("000" + pms_hex[2:])[-48:]
         self.master_secret = ""
         self.client_write_key = ""
@@ -38,7 +38,8 @@ class Decrypt:
         self.client_write_iv = ""
         self.server_write_iv = ""
         self.mac_length = 20
-        self.compute_master_secret(bytes.fromhex(client_r[2:]), bytes.fromhex(server_r[2:]) )
+        self.cipher = cipher
+        self.compute_master_secret(client_r, server_r)
 
     def compute_master_secret(self, client_random, server_random):
         seed0 = client_random + server_random
@@ -70,11 +71,20 @@ class Decrypt:
         computing keys for AES-256-CBC-SHA
         """
         self.mac_length = 20
-        self.client_write_key = keys[40:56]
-        self.server_write_key = keys[56:72]
-        self.client_write_iv = keys[72:88]
-        self.server_write_iv = keys[88:104]
-
+        if (self.cipher == 0x0035):
+            # TLS_RSA_WITH_AES_256_CBC_SHA
+            self.client_write_key = keys[40:72]
+            self.server_write_key = keys[72:104]
+            self.client_write_iv = keys[104:120]
+            self.server_write_iv = keys[120:136]
+        elif(self.cipher == 0x002f):
+            # TLS_RSA_WITH_AES_128_CBC_SHA
+            self.client_write_key = keys[40:56]
+            self.server_write_key = keys[56:72]
+            self.client_write_iv = keys[72:88]
+            self.server_write_iv = keys[88:104]
+        else:
+            print("Unknown cipher!")
 
     def decrypt_app_data(self, side, app_data, resumption=0, client_random="", server_random=""):
         if resumption == 1:
