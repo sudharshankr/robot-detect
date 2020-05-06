@@ -1,33 +1,24 @@
-# robot-detect
 
-Proof of concept attack and detection for ROBOT (Return Of
-Bleichenbacher's Oracle Threat).
+1.	Clone the Erlang server repository and the attack script repository as given below.
 
-More Info:
-* https://robotattack.org/
+	`> git clone https://github.com/jonathanraes/erlang-tlsserver`
+	`> git clone https://github.com/sudharshankr/robot-detect`
 
-Dependencies
-============
+2. Build the Erlang server and start the container with the help of the Dockerfile present in the directory erlang-tlsserver.
+	
+	`> docker build -t erlang-server .`
+	`> docker run --publish 4000:4000 --name erlang-server erlang-server`
+	
+	The above server will run on port 4000 and the port 4000 on the host is forwarded tothis server.
 
-This script needs Python 3, the gmpy2 and the cryptography library.
+3. Change into the directory robot-detect/docker. Install the requirements using the following command.
+	
+	`> pip install -r requirements.txt`
 
-Install with pip
-================
+4. Change into the directoryrobot-detect. Run the attack by executing the attack.pyfile along with the captured pcapfile as the command-line argument as shown below, or leaving out the argument to listen on the localhost interface.
 
-To install with the needed dependencies run:
-
-`pip install robot-detect`
-
-License
-=======
-
-This work is licensed as CC0 (public domain).
-
-Authors
-=======
-
-The attack proof of concept code was provided by Tibor Jager.
-
-The detection was written by the ROBOT team:
-
-Hanno Böck, Juraj Somorovsky, Craig Young
+	`> python attack.py capture.pcapng`
+	or
+	`> python attack.py`
+	
+	For the interactive mode, run the python file and make a request using curl or acorrectly configured browser as described in the previous section.
