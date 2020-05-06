@@ -90,5 +90,5 @@ if __name__ == "__main__":
     for packet in packets:
       pl.process_packet(packet)
   else:
-    sniff(filter="tcp", prn=pl.process_packet, iface="eth0", store=True)
+    sniff(filter="tcp", prn=pl.process_packet, iface="lo", store=True)
 
