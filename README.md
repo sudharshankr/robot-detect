@@ -1,4 +1,5 @@
-##Capture the pcap
+<h2>Capture the pcap</h2>
+
 In order to make a connection to the server that can be attacked using Bleichenbacher’s attack, some configuration changes need to be made. This is necessary because most modern applications have blocked the use of the RSA key agreement protocols because of their vulnerabilities. Our server therefore supports RSA and ECDH algorithms, and we need to force the clients to use RSA in order to demonstrate the attack. We show how to achieve this with 2 web clients, curl and Firefox.
 
 *	When using curl, the --ciphers AES128-SHA:AES256-SHA256 option should be added when connecting to the server to select the right cipher suite, in addition to the flag--insecure to ignore errors about the self-signed certificate.
@@ -8,7 +9,7 @@ In order to make a connection to the server that can be attacked using Bleichenb
 
 Note that we can only capture the traffic belonging to one client-server pair, i.e, traffic involving only one client. This is due to a limitation in the attack script that we discuss about in Section-4.3.3 of the report.
 
-##Run the Demo
+<h2>Run the Demo</h2>
 
 1.	Clone the Erlang server repository and the attack script repository as given below.
 
