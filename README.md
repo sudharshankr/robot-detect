@@ -18,7 +18,7 @@ Note that we can only capture the traffic belonging to one client-server pair, i
 
 2. Build the Erlang server and start the container with the help of the Dockerfile present in the directory erlang-tlsserver.
 	
-	`> docker build -t erlang-server .`
+	`> docker build -t erlang-server .`\
 	`> docker run --publish 4000:4000 --name erlang-server erlang-server`
 	
 	The above server will run on port 4000 and the port 4000 on the host is forwarded tothis server.
