@@ -34,3 +34,8 @@ Note that we can only capture the traffic belonging to one client-server pair, i
 	`> python attack.py`
 	
 	For the interactive mode, run the python file and make a request using curl or acorrectly configured browser as described in the previous section.
+
+<h2>Limitation of the attack script</h2>
+Currently the attack script is capable of handling communication between 2 parties, i.e., one client and server. If the captured *pcap* file or the intercepted communication on localhost has more than one client communicating with the server, the attack script will be able to decrypt the traffic belonging to only one pair of client and server, the one that it encounters first, and will not be able to decrypt any other traffic corresponding to the communication involving other clients. We were not able to code out a solution to this problem due to the time constraints. We overcome this problem by filtering out the packets belonging to each client with the help of a tool such as Wireshark. This can help us to create separate *pcap* files corresponding to each client which can then be fed to our attack script to perform the decryption.
+
+Additionally, the attack script currently only supports the RSA_AES cipher suites `RSA_AES_128_SHA` and `RSA_AES_256_SHA`, the DES cipher `RSA_DES_EDE3_SHA` is currently not supported.
