@@ -13,7 +13,7 @@ Note that we can only capture the traffic belonging to one client-server pair, i
 
 1.	Clone the Erlang server repository and the attack script repository as given below.
 
-	`> git clone https://github.com/jonathanraes/erlang-tlsserver`
+	`> git clone https://github.com/jonathanraes/erlang-tlsserver`\
 	`> git clone https://github.com/sudharshankr/robot-detect`
 
 2. Build the Erlang server and start the container with the help of the Dockerfile present in the directory erlang-tlsserver.
