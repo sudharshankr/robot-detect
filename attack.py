@@ -78,7 +78,7 @@ class PacketListener:
     data = int.from_bytes(raw[5:5+data_length], "big")
     print("Encrypted application data: " + hex(data))
 
-    sender = "sever" if packet[TCP].sport == 4000 else "client"
+    sender = "server" if packet[TCP].sport == 4000 else "client"
     data = self.decrypt.decrypt_app_data(sender, raw[5:5+data_length], self.resumption, self.client_random, self.server_random)
     print("Decrypted data:\n", data)
 
